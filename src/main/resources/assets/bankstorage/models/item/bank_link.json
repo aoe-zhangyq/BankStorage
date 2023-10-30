@@ -2,6 +2,12 @@
   "overrides": [
     {
       "predicate": {
+        "linked_bank": 0.7
+      },
+      "model": "bankstorage:item/link"
+    },
+    {
+      "predicate": {
         "linked_bank": 0.1
       },
       "model": "bankstorage:item/link_1"

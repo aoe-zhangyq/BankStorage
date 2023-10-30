@@ -15,8 +15,8 @@ import net.natte.bankstorage.item.BankItem;
 public class BankRecipe extends ShapedRecipe {
 
     public BankRecipe(ShapedRecipe recipe) {
-        super(recipe.getId(), "bank_upgrade", recipe.getCategory(), recipe.getWidth(), recipe.getHeight(),
-                recipe.getIngredients(), recipe.getOutput(null));
+        super(recipe.getGroup(), recipe.getCategory(), recipe.getWidth(), recipe.getHeight(),
+                recipe.getIngredients(), recipe.getResult(null));
     }
 
     @Override
@@ -34,16 +34,9 @@ public class BankRecipe extends ShapedRecipe {
     }
 
     public static class Serializer extends ShapedRecipe.Serializer {
-
         @Override
-        public BankRecipe read(Identifier id, JsonObject json) {
-            return new BankRecipe(super.read(id, json));
-        }
-
-        @Override
-        public BankRecipe read(Identifier id, PacketByteBuf buf) {
-            return new BankRecipe(super.read(id, buf));
-
+        public ShapedRecipe read(PacketByteBuf packetByteBuf) {
+            return new BankRecipe(super.read(packetByteBuf));
         }
     }
 

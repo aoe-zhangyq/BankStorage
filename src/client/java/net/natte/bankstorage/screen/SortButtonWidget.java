@@ -3,6 +3,7 @@ package net.natte.bankstorage.screen;
 import java.util.function.Consumer;
 
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.ButtonTextures;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.text.Text;
@@ -18,7 +19,8 @@ public class SortButtonWidget extends TexturedButtonWidget {
 
     public SortButtonWidget(SortMode sortMode, int x, int y, int width, int height, Identifier texture,
             Consumer<SortButtonWidget> pressAction) {
-        super(x, y, width, height, 14, 14, texture, button -> pressAction.accept((SortButtonWidget) button));
+        super(x, y, width, height, new ButtonTextures(texture, texture), button -> pressAction.accept((SortButtonWidget) button));
+
         this.sortMode = sortMode;
         this.lastPressedTime = 0;
 
@@ -37,9 +39,9 @@ public class SortButtonWidget extends TexturedButtonWidget {
     }
 
     public void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.drawTexture(context, this.texture, this.getX(), this.getY(), uOffset(), vOffset(),
-                this.hoveredVOffset,
-                this.width, this.height, textureWidth, textureHeight);
+        Identifier identifier = this.textures.get(this.isNarratable(), this.isSelected());
+        context.drawTexture(identifier, this.getX(), this.getY(), uOffset(), vOffset(), this.width, this.height,
+                256, 256);
     }
 
     private int uOffset() {

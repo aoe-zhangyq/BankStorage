@@ -3,6 +3,7 @@ package net.natte.bankstorage.world;
 import java.util.Map;
 import java.util.UUID;
 
+import net.minecraft.datafixer.DataFixTypes;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.PersistentState;
@@ -47,8 +48,10 @@ public class BankStateSaverAndLoader extends PersistentState {
         PersistentStateManager persistentStateManager = server.getWorld(World.OVERWORLD).getPersistentStateManager();
 
         BankStateSaverAndLoader state = persistentStateManager.getOrCreate(
-                BankStateSaverAndLoader::createFromNbt,
-                BankStateSaverAndLoader::new,
+                new PersistentState.Type<>(
+                        BankStateSaverAndLoader::new,
+                        BankStateSaverAndLoader::createFromNbt,
+                        DataFixTypes.SAVED_DATA_MAP_DATA),
                 BankStorage.MOD_ID);
 
         state.markDirty();

@@ -70,6 +70,7 @@ public class BankStorage implements ModInitializer {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+	private static final BankType BANK = new BankType("bank", 1_000_000_000, 12, 9, 176, 114 + 18 * 12);
 	private static final BankType BANK_1 = new BankType("bank_1", 256, 1, 9, 176, 114 + 18 * 1);
 	private static final BankType BANK_2 = new BankType("bank_2", 1024, 2, 9, 176, 114 + 18 * 2);
 	private static final BankType BANK_3 = new BankType("bank_3", 4096, 3, 9, 176, 114 + 18 * 3);
@@ -116,6 +117,7 @@ public class BankStorage implements ModInitializer {
 
 	private void registerBanks() {
 
+		BANK.register(bankTypes);
 		BANK_1.register(bankTypes);
 		BANK_2.register(bankTypes);
 		BANK_3.register(bankTypes);

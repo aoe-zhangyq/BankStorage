@@ -8,6 +8,7 @@ import net.minecraft.inventory.RecipeInputInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.ShapedRecipe;
+import net.minecraft.recipe.book.CraftingRecipeCategory;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
@@ -18,8 +19,8 @@ import net.natte.bankstorage.util.Util;
 public class BankLinkRecipe extends ShapedRecipe {
 
     public BankLinkRecipe(ShapedRecipe recipe) {
-        super(recipe.getId(), "bank_link", recipe.getCategory(), recipe.getWidth(), recipe.getHeight(),
-                recipe.getIngredients(), recipe.getOutput(null));
+        super(recipe.getGroup(), recipe.getCategory(), recipe.getWidth(), recipe.getHeight(),
+                recipe.getIngredients(), recipe.getResult(null));
     }
 
     @Override
@@ -51,14 +52,8 @@ public class BankLinkRecipe extends ShapedRecipe {
     public static class Serializer extends ShapedRecipe.Serializer {
 
         @Override
-        public BankLinkRecipe read(Identifier id, JsonObject json) {
-            return new BankLinkRecipe(super.read(id, json));
-        }
-
-        @Override
-        public BankLinkRecipe read(Identifier id, PacketByteBuf buf) {
-            return new BankLinkRecipe(super.read(id, buf));
-
+        public ShapedRecipe read(PacketByteBuf packetByteBuf) {
+            return new BankRecipe(super.read(packetByteBuf));
         }
     }
 

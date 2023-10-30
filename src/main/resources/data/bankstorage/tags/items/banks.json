@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
+        "bankstorage:bank",
         "bankstorage:bank_1",
         "bankstorage:bank_2",
         "bankstorage:bank_3",
